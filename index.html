@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Powerlifting Trainer</title>
 
-<link rel="stylesheet" href="style.css">
+<title>Powerlifting Pro</title>
+
+<link rel="stylesheet" href="./style.css">
 
 </head>
+
 
 <body>
 
@@ -18,60 +22,63 @@
 
 <h1>POWERLIFTING</h1>
 
-<button class="mainButton" onclick="openTraining()">
+<button class="mainButton" id="btnTraining">
 ENTRENAMIENTO
 </button>
 
-<button class="mainButton" onclick="openStats()">
+<button class="mainButton" id="btnStats">
 ESTADÍSTICAS
 </button>
 
 </div>
 
 
-<!-- LISTA DE DIAS -->
+<!-- DIAS -->
 <div id="trainingDays" class="screen">
 
-<h2>PLAN DE 14 DÍAS</h2>
+<h2>PLAN 14 DÍAS</h2>
 
 <div id="daysContainer"></div>
 
-<button class="backButton" onclick="goHome()">Volver</button>
+<button class="backButton" id="backHome1">Volver</button>
 
 </div>
 
 
-<!-- ENTRENAMIENTO -->
+<!-- WORKOUT -->
 <div id="workout" class="screen">
 
 <h2 id="workoutTitle"></h2>
 
 <div id="exerciseContainer"></div>
 
-<button class="timerButton" onclick="startRest()">Iniciar descanso</button>
+<button class="timerButton" id="startTimer">
+Iniciar descanso
+</button>
 
 <div id="timer">00:00</div>
 
-<button class="backButton" onclick="openTraining()">Volver</button>
+<button class="backButton" id="backDays">Volver</button>
 
 </div>
 
 
-<!-- ESTADISTICAS -->
+<!-- STATS -->
 <div id="stats" class="screen">
 
-<h2>PROGRESO</h2>
+<h2>Estadísticas</h2>
 
 <canvas id="progressChart"></canvas>
 
-<button class="backButton" onclick="goHome()">Volver</button>
+<button class="backButton" id="backHome2">Volver</button>
 
 </div>
 
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="app.js"></script>
+<script src="./app.js"></script>
 
 </body>
 </html>
