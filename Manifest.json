@@ -1,15 +1,9 @@
 {
-"name":"Powerlifting Coach",
-"short_name":"PL Coach",
+"name":"Powerlifting Peak",
+"short_name":"PL Peak",
 "start_url":"index.html",
 "display":"standalone",
 "background_color":"#111",
-"theme_color":"#ff3b30",
-"icons":[
-{
-"src":"icon.png",
-"sizes":"192x192",
-"type":"image/png"
-}
-]
+"theme_color":"#ff3c3c",
+"icons":[]
 }
