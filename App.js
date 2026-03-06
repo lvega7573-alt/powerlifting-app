@@ -1,105 +1,108 @@
-function openTraining(){
+function showScreen(id){
 
-document.getElementById("home").classList.add("hidden")
-document.getElementById("trainingScreen").classList.remove("hidden")
+document.querySelectorAll(".screen").forEach(s=>{
+s.classList.remove("active")
+})
 
-loadDays()
-
-}
-
-function openStats(){
-
-document.getElementById("home").classList.add("hidden")
-document.getElementById("statsScreen").classList.remove("hidden")
-
-loadStats()
+document.getElementById(id).classList.add("active")
 
 }
 
 function goHome(){
-
-document.getElementById("home").classList.remove("hidden")
-
-document.getElementById("trainingScreen").classList.add("hidden")
-document.getElementById("statsScreen").classList.add("hidden")
-document.getElementById("dayScreen").classList.add("hidden")
-
+showScreen("home")
 }
 
-function loadDays(){
+function openTraining(){
 
-let container=document.getElementById("daysContainer")
+showScreen("training")
+
+const container=document.getElementById("daysContainer")
 
 container.innerHTML=""
 
-for(let day in TRAINING_DAYS){
+Object.keys(TRAINING_DAYS).forEach(day=>{
 
-let btn=document.createElement("button")
+const btn=document.createElement("button")
 
 btn.className="dayButton"
 
-btn.innerText="DÍA "+day
+btn.innerText="Día "+day
 
-btn.onclick=()=>openDay(day)
+btn.onclick=()=>openWorkout(day)
 
 container.appendChild(btn)
 
-}
+})
 
 }
 
-function openDay(day){
+function openWorkout(day){
 
-document.getElementById("trainingScreen").classList.add("hidden")
-document.getElementById("dayScreen").classList.remove("hidden")
+showScreen("workout")
 
-let data=TRAINING_DAYS[day]
+const dayData=TRAINING_DAYS[day]
 
-document.getElementById("dayTitle").innerText=data.title
+document.getElementById("dayTitle").innerText=dayData.title
 
-let workout=document.getElementById("workout")
+const container=document.getElementById("workoutContainer")
 
-workout.innerHTML=""
+container.innerHTML=""
 
-data.blocks.forEach(block=>{
+dayData.blocks.forEach(block=>{
 
 if(block.type==="text"){
 
-let div=document.createElement("div")
-div.innerHTML="<h3>"+block.label+"</h3>"
-workout.appendChild(div)
+const div=document.createElement("div")
+
+div.innerText=block.label
+
+container.appendChild(div)
 
 }
 
 if(block.type==="exercise"){
 
-let ex=document.createElement("div")
-ex.className="exercise"
+const card=document.createElement("div")
 
-ex.innerHTML="<b>"+block.name+"</b>"
+card.className="exerciseCard"
+
+const title=document.createElement("h3")
+
+title.innerText=block.name
+
+card.appendChild(title)
 
 block.sets.forEach(set=>{
 
-let row=document.createElement("div")
-row.className="set"
+const row=document.createElement("div")
 
-row.innerHTML=`
+row.className="setRow"
 
-<span>${set.kg}kg x ${set.reps}</span>
+const target=document.createElement("span")
 
-<input placeholder="real">
+target.innerText=set.kg+"kg x "+set.reps
 
-<button class="restButton" onclick="startRest(${set.rest})">
-⏱
-</button>
+const input=document.createElement("input")
 
-`
+input.placeholder="real"
 
-ex.appendChild(row)
+const timer=document.createElement("button")
+
+timer.className="timerButton"
+
+timer.innerText="rest"
+
+timer.onclick=()=>startTimer(set.rest)
+
+row.appendChild(target)
+row.appendChild(input)
+row.appendChild(timer)
+
+card.appendChild(row)
 
 })
 
-workout.appendChild(ex)
+container.appendChild(card)
 
 }
 
@@ -107,24 +110,17 @@ workout.appendChild(ex)
 
 }
 
-function backToDays(){
+function startTimer(seconds){
 
-document.getElementById("dayScreen").classList.add("hidden")
-document.getElementById("trainingScreen").classList.remove("hidden")
+let time=seconds
 
-}
-
-function startRest(sec){
-
-let time=sec
-
-let timer=setInterval(()=>{
+const interval=setInterval(()=>{
 
 time--
 
 if(time<=0){
 
-clearInterval(timer)
+clearInterval(interval)
 
 alert("Descanso terminado")
 
@@ -134,43 +130,27 @@ alert("Descanso terminado")
 
 }
 
-function loadStats(){
+function openStats(){
 
-let squat=[120,130,140]
-let bench=[90,100,110]
-let deadlift=[150,160,170]
+showScreen("stats")
 
-new Chart(document.getElementById("squatChart"),{
+createCharts()
 
-type:"line",
-
-data:{
-labels:["sem1","sem2","sem3"],
-datasets:[{label:"Squat",data:squat}]
 }
 
-})
+function createCharts(){
 
-new Chart(document.getElementById("benchChart"),{
+const ctx=document.getElementById("squatChart")
 
+new Chart(ctx,{
 type:"line",
-
 data:{
-labels:["sem1","sem2","sem3"],
-datasets:[{label:"Bench",data:bench}]
+labels:["Semana1","Semana2","Semana3"],
+datasets:[{
+label:"Sentadilla",
+data:[150,160,170]
+}]
 }
-
-})
-
-new Chart(document.getElementById("deadliftChart"),{
-
-type:"line",
-
-data:{
-labels:["sem1","sem2","sem3"],
-datasets:[{label:"Deadlift",data:deadlift}]
-}
-
 })
 
 }
