@@ -1,8 +1,0 @@
-{
-"name":"Powerlifting Tracker",
-"short_name":"PL Tracker",
-"start_url":"index.html",
-"display":"standalone",
-"background_color":"#111",
-"theme_color":"#111"
-}
