@@ -1,84 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Powerlifting Coach</title>
 
-<title>Powerlifting Pro</title>
+<link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet" href="./style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
-
 <body>
 
-<div id="app">
+<div id="home">
 
-<!-- HOME -->
-<div id="home" class="screen active">
+<h1>POWERLIFTING COACH</h1>
 
-<h1>POWERLIFTING</h1>
-
-<button class="mainButton" id="btnTraining">
+<button class="mainBtn" onclick="showTraining()">
 ENTRENAMIENTO
 </button>
 
-<button class="mainButton" id="btnStats">
+<button class="mainBtn" onclick="showStats()">
 ESTADÍSTICAS
 </button>
 
 </div>
 
 
-<!-- DIAS -->
-<div id="trainingDays" class="screen">
+<div id="trainingScreen" class="hidden">
 
 <h2>PLAN 14 DÍAS</h2>
 
 <div id="daysContainer"></div>
 
-<button class="backButton" id="backHome1">Volver</button>
+<button class="backBtn" onclick="goHome()">VOLVER</button>
 
 </div>
 
 
-<!-- WORKOUT -->
-<div id="workout" class="screen">
+<div id="workoutScreen" class="hidden">
 
-<h2 id="workoutTitle"></h2>
+<h2 id="dayTitle"></h2>
 
 <div id="exerciseContainer"></div>
 
-<button class="timerButton" id="startTimer">
-Iniciar descanso
-</button>
+<div id="timer">
+<span id="time">0</span>s
+</div>
 
-<div id="timer">00:00</div>
+<button onclick="startRest()">INICIAR DESCANSO</button>
 
-<button class="backButton" id="backDays">Volver</button>
+<button class="backBtn" onclick="showTraining()">VOLVER</button>
 
 </div>
 
 
-<!-- STATS -->
-<div id="stats" class="screen">
+<div id="statsScreen" class="hidden">
 
-<h2>Estadísticas</h2>
+<h2>PROGRESO</h2>
 
-<canvas id="progressChart"></canvas>
+<canvas id="benchChart"></canvas>
+<canvas id="squatChart"></canvas>
+<canvas id="deadliftChart"></canvas>
 
-<button class="backButton" id="backHome2">Volver</button>
+<button class="backBtn" onclick="goHome()">VOLVER</button>
 
 </div>
 
-</div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="./app.js"></script>
+<script src="training-data.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
