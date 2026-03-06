@@ -3,56 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Powerlifting Peak</title>
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
+<title>Powerlifting 14D</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+font-family: -apple-system,BlinkMacSystemFont;
+background:#0f0f0f;
+color:white;
+text-align:center;
+margin:0;
+}
+
+h1{
+margin-top:30px;
+}
+
+.container{
+padding:20px;
+}
+
+button{
+width:80%;
+padding:20px;
+margin:12px;
+font-size:20px;
+border-radius:14px;
+border:none;
+background:#1f1f1f;
+color:white;
+}
+
+button.big{
+font-size:26px;
+padding:30px;
+background:#222;
+}
+
+button.day{
+background:#2d2d2d;
+}
+
+button:active{
+background:#444;
+}
+
+input{
+width:80px;
+padding:10px;
+margin:10px;
+font-size:18px;
+text-align:center;
+}
+
+.timer{
+font-size:24px;
+margin:10px;
+}
+
+.back{
+background:#444;
+margin-top:20px;
+}
+
+canvas{
+background:white;
+border-radius:10px;
+margin-top:20px;
+}
+
+</style>
 </head>
 
 <body>
 
-<div id="home">
-<h1>POWERLIFTING PEAK</h1>
+<div id="app" class="container"></div>
 
-<button onclick="openTraining()">🏋️ Entrenamientos</button>
-<button onclick="openStats()">📊 Estadísticas</button>
+<script>
+
+const app = document.getElementById("app")
+
+const entrenamiento = {
+
+1:[{ej:"Sentadilla",objetivo:112},{ej:"Pecho",objetivo:90},{ej:"Peso Muerto",objetivo:120}],
+2:[{ej:"Pecho",objetivo:95},{ej:"Sentadilla",objetivo:115}],
+3:[{ej:"Peso Muerto",objetivo:130}],
+4:[{ej:"Pecho",objetivo:100}],
+5:[{ej:"Sentadilla",objetivo:120}],
+6:[{ej:"Peso Muerto",objetivo:140}],
+7:[{ej:"Descanso"}],
+
+8:[{ej:"Sentadilla",objetivo:130},{ej:"Pecho",objetivo:100}],
+9:[{ej:"Peso Muerto",objetivo:150}],
+10:[{ej:"Pecho",objetivo:110}],
+11:[{ej:"Sentadilla",objetivo:140}],
+12:[{ej:"Peso Muerto",objetivo:160}],
+13:[{ej:"Pecho",objetivo:115}],
+14:[{ej:"Competencia"}]
+
+}
+
+function home(){
+
+app.innerHTML=`
+
+<h1>POWERLIFTING</h1>
+
+<button class="big" onclick="verEntrenamiento()">🏋️ Entrenamiento</button>
+
+<button class="big" onclick="verStats()">📊 Estadísticas</button>
+
+`
+
+}
+
+function verEntrenamiento(){
+
+let botones=""
+
+for(let i=1;i<=14;i++){
+
+botones+=`<button class="day" onclick="verDia(${i})">Día ${i}</button>`
+
+}
+
+app.innerHTML=`
+
+<h1>Entrenamiento</h1>
+
+${botones}
+
+<button class="back" onclick="home()">Volver</button>
+
+`
+
+}
+
+function verDia(d){
+
+let lista=""
+
+entrenamiento[d].forEach((e,i)=>{
+
+if(e.objetivo){
+
+lista+=`
+
+<div>
+
+<h3>${e.ej}</h3>
+
+Objetivo: ${e.objetivo} kg<br>
+
+<input type="number" placeholder="Real" id="peso${d}${i}">
+
+<br>
+
+<button onclick="guardar(${d},${i})">Guardar</button>
+
+<button onclick="timer()">Descanso</button>
 
 </div>
 
+`
 
-<div id="training" class="hidden">
+}else{
 
-<h2>Plan de 14 días</h2>
+lista+=`<h2>${e.ej}</h2>`
 
-<div id="daysList"></div>
+}
 
-<button onclick="goHome()">⬅ Volver</button>
+})
 
-</div>
+app.innerHTML=`
 
+<h1>Día ${d}</h1>
 
-<div id="stats" class="hidden">
+${lista}
 
-<h2>Estadísticas</h2>
+<div class="timer" id="timer">00:00</div>
 
-<div class="kpi">
-Series completadas: <span id="seriesDone">0</span>
-</div>
+<button class="back" onclick="verEntrenamiento()">Volver</button>
 
-<div class="kpi">
-Peso total levantado: <span id="totalWeight">0</span> kg
-</div>
+`
 
-<div class="kpi">
-Promedio descanso: <span id="avgRest">0</span> s
-</div>
+}
 
-<canvas id="volumeChart"></canvas>
+function guardar(d,i){
 
-<button onclick="goHome()">⬅ Volver</button>
+let peso=document.getElementById("peso"+d+i).value
 
-</div>
+localStorage.setItem("d"+d+"e"+i,peso)
 
-<script src="app.js"></script>
+alert("Guardado")
+
+}
+
+let intervalo
+
+function timer(){
+
+let tiempo=120
+
+clearInterval(intervalo)
+
+intervalo=setInterval(()=>{
+
+let m=Math.floor(tiempo/60)
+let s=tiempo%60
+
+document.getElementById("timer").innerText=
+(m<10?"0"+m:m)+":"+(s<10?"0"+s:s)
+
+tiempo--
+
+if(tiempo<0) clearInterval(intervalo)
+
+},1000)
+
+}
+
+function verStats(){
+
+let pecho=[]
+let sentadilla=[]
+let muerto=[]
+
+for(let i=1;i<=14;i++){
+
+for(let j=0;j<3;j++){
+
+let v=localStorage.getItem("d"+i+"e"+j)
+
+if(v){
+
+if(j==0) sentadilla.push(v)
+if(j==1) pecho.push(v)
+if(j==2) muerto.push(v)
+
+}
+
+}
+
+}
+
+app.innerHTML=`
+
+<h1>Estadísticas</h1>
+
+<canvas id="grafico"></canvas>
+
+<button class="back" onclick="home()">Volver</button>
+
+`
+
+let ctx=document.getElementById("grafico")
+
+new Chart(ctx,{
+
+type:"line",
+
+data:{
+labels:["1","2","3","4","5","6","7"],
+datasets:[
+{label:"Pecho",data:pecho},
+{label:"Sentadilla",data:sentadilla},
+{label:"Peso Muerto",data:muerto}
+]
+}
+
+})
+
+}
+
+home()
+
+</script>
 
 </body>
 </html>
