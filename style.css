@@ -1,33 +1,30 @@
 body{
-background:#000;
+background:black;
 color:white;
 font-family:Arial;
 text-align:center;
 margin:0;
 }
 
-h1{
-margin-top:60px;
+.logo{
+margin-top:40px;
 font-size:32px;
+letter-spacing:3px;
 }
 
 .mainBtn{
-
-display:block;
 width:80%;
-margin:20px auto;
 padding:25px;
-font-size:24px;
-
+margin:20px auto;
+display:block;
+font-size:22px;
+border-radius:12px;
+border:none;
 background:#111;
 color:white;
-
-border:2px solid #444;
-border-radius:12px;
-
 }
 
-.mainBtn:active{
+.mainBtn:hover{
 background:#333;
 }
 
@@ -43,39 +40,34 @@ padding:20px;
 }
 
 .dayBtn{
-
 padding:20px;
-font-size:20px;
-
-background:#111;
-color:white;
-
-border:1px solid #555;
+font-size:18px;
+border:none;
 border-radius:10px;
+background:#1a1a1a;
+color:white;
+}
 
+.exerciseCard{
+background:#111;
+margin:15px;
+padding:15px;
+border-radius:10px;
+}
+
+.setRow{
+display:flex;
+justify-content:space-between;
+padding:8px;
+border-bottom:1px solid #333;
 }
 
 .backBtn{
-
-margin-top:20px;
+margin:30px;
 padding:15px;
 font-size:18px;
-
 background:#222;
 color:white;
-
 border:none;
-border-radius:8px;
-
-}
-
-#timer{
-font-size:40px;
-margin:20px;
-}
-
-canvas{
-background:white;
-margin:20px;
 border-radius:10px;
 }
