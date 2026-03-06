@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,67 +8,45 @@
 
 <link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
 
+<div id="app">
+
+<h1 class="logo">POWERLIFTING</h1>
+
 <div id="home">
 
-<h1>POWERLIFTING COACH</h1>
+<button class="mainBtn" onclick="openTraining()">ENTRENAMIENTO</button>
 
-<button class="mainBtn" onclick="showTraining()">
-ENTRENAMIENTO
-</button>
-
-<button class="mainBtn" onclick="showStats()">
-ESTADÍSTICAS
-</button>
+<button class="mainBtn" onclick="openStats()">ESTADÍSTICAS</button>
 
 </div>
 
+<div id="training" class="hidden">
 
-<div id="trainingScreen" class="hidden">
-
-<h2>PLAN 14 DÍAS</h2>
+<h2>Seleccionar día</h2>
 
 <div id="daysContainer"></div>
 
-<button class="backBtn" onclick="goHome()">VOLVER</button>
+<button class="backBtn" onclick="goHome()">Volver</button>
 
 </div>
 
+<div id="workout" class="hidden"></div>
 
-<div id="workoutScreen" class="hidden">
+<div id="stats" class="hidden">
 
-<h2 id="dayTitle"></h2>
+<h2>Estadísticas</h2>
 
-<div id="exerciseContainer"></div>
+<canvas id="progressChart"></canvas>
 
-<div id="timer">
-<span id="time">0</span>s
-</div>
-
-<button onclick="startRest()">INICIAR DESCANSO</button>
-
-<button class="backBtn" onclick="showTraining()">VOLVER</button>
+<button class="backBtn" onclick="goHome()">Volver</button>
 
 </div>
 
-
-<div id="statsScreen" class="hidden">
-
-<h2>PROGRESO</h2>
-
-<canvas id="benchChart"></canvas>
-<canvas id="squatChart"></canvas>
-<canvas id="deadliftChart"></canvas>
-
-<button class="backBtn" onclick="goHome()">VOLVER</button>
-
 </div>
-
 
 <script src="training-data.js"></script>
 <script src="app.js"></script>
