@@ -1,116 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Powerlifting Coach</title>
-
-<style>
-body{
-font-family:Arial;
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-button{
-padding:15px;
-margin:10px;
-font-size:18px;
-background:#ff3b30;
-color:white;
-border:none;
-border-radius:10px;
-}
-
-input{
-padding:10px;
-font-size:18px;
-margin:10px;
-border-radius:10px;
-}
-
-#timer{
-font-size:50px;
-margin:20px;
-}
-</style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Powerlifting Peak</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
 </head>
 
 <body>
 
-<h1>Powerlifting Coach</h1>
+<div id="home">
+<h1>POWERLIFTING PEAK</h1>
 
-<h2>Registro de Serie</h2>
+<button onclick="openTraining()">🏋️ Entrenamientos</button>
+<button onclick="openStats()">📊 Estadísticas</button>
 
-<button onclick="startTimer()">Iniciar Serie</button>
+</div>
 
-<div id="timer">00:00</div>
 
-<br>
+<div id="training" class="hidden">
 
-<label>Peso objetivo</label><br>
-<input id="target">
+<h2>Plan de 14 días</h2>
 
-<br>
+<div id="daysList"></div>
 
-<label>Peso real</label><br>
-<input id="actual">
+<button onclick="goHome()">⬅ Volver</button>
 
-<br>
+</div>
 
-<button onclick="saveSet()">Guardar serie</button>
 
-<script>
+<div id="stats" class="hidden">
 
-let time=0
-let timerInterval
+<h2>Estadísticas</h2>
 
-function startTimer(){
+<div class="kpi">
+Series completadas: <span id="seriesDone">0</span>
+</div>
 
-clearInterval(timerInterval)
+<div class="kpi">
+Peso total levantado: <span id="totalWeight">0</span> kg
+</div>
 
-time=0
+<div class="kpi">
+Promedio descanso: <span id="avgRest">0</span> s
+</div>
 
-timerInterval=setInterval(()=>{
+<canvas id="volumeChart"></canvas>
 
-time++
+<button onclick="goHome()">⬅ Volver</button>
 
-let min=Math.floor(time/60)
-let sec=time%60
+</div>
 
-document.getElementById("timer").innerText=
-String(min).padStart(2,"0")+":"+
-String(sec).padStart(2,"0")
-
-},1000)
-
-}
-
-function saveSet(){
-
-let target=document.getElementById("target").value
-let actual=document.getElementById("actual").value
-
-let log={
-date:new Date(),
-target:target,
-actual:actual,
-rest:time
-}
-
-let history=JSON.parse(localStorage.getItem("training"))||[]
-
-history.push(log)
-
-localStorage.setItem("training",JSON.stringify(history))
-
-alert("Serie guardada")
-
-}
-
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
