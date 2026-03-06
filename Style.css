@@ -3,27 +3,45 @@ font-family:Arial;
 background:#111;
 color:white;
 text-align:center;
-padding:20px;
 }
 
 button{
 padding:15px;
 margin:10px;
 font-size:18px;
-background:#ff3b30;
-color:white;
 border:none;
-border-radius:10px;
+border-radius:8px;
+background:#ff3c3c;
+color:white;
+}
+
+.hidden{
+display:none;
+}
+
+.day{
+border:1px solid #333;
+padding:15px;
+margin:10px;
+}
+
+.series{
+display:flex;
+justify-content:space-between;
+padding:6px;
+border-bottom:1px solid #333;
 }
 
 input{
-padding:10px;
-font-size:18px;
-margin:10px;
-border-radius:10px;
+width:60px;
 }
 
-#timer{
-font-size:50px;
+.done{
+color:#4caf50;
+font-weight:bold;
+}
+
+.kpi{
 margin:20px;
+font-size:20px;
 }
