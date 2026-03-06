@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Powerlifting App</title>
+<title>Powerlifting Trainer</title>
 
 <link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -16,10 +14,9 @@
 <div id="app">
 
 <!-- HOME -->
-
 <div id="home" class="screen active">
 
-<h1 class="logo">POWERLIFT</h1>
+<h1>POWERLIFTING</h1>
 
 <button class="mainButton" onclick="openTraining()">
 ENTRENAMIENTO
@@ -32,11 +29,10 @@ ESTADÍSTICAS
 </div>
 
 
-<!-- TRAINING -->
+<!-- LISTA DE DIAS -->
+<div id="trainingDays" class="screen">
 
-<div id="training" class="screen">
-
-<h2>Entrenamientos</h2>
+<h2>PLAN DE 14 DÍAS</h2>
 
 <div id="daysContainer"></div>
 
@@ -45,30 +41,28 @@ ESTADÍSTICAS
 </div>
 
 
-<!-- WORKOUT -->
-
+<!-- ENTRENAMIENTO -->
 <div id="workout" class="screen">
 
-<h2 id="dayTitle"></h2>
+<h2 id="workoutTitle"></h2>
 
-<div id="workoutContainer"></div>
+<div id="exerciseContainer"></div>
+
+<button class="timerButton" onclick="startRest()">Iniciar descanso</button>
+
+<div id="timer">00:00</div>
 
 <button class="backButton" onclick="openTraining()">Volver</button>
 
 </div>
 
 
-<!-- STATS -->
-
+<!-- ESTADISTICAS -->
 <div id="stats" class="screen">
 
-<h2>Estadísticas</h2>
+<h2>PROGRESO</h2>
 
-<canvas id="squatChart"></canvas>
-
-<canvas id="benchChart"></canvas>
-
-<canvas id="deadliftChart"></canvas>
+<canvas id="progressChart"></canvas>
 
 <button class="backButton" onclick="goHome()">Volver</button>
 
@@ -76,7 +70,7 @@ ESTADÍSTICAS
 
 </div>
 
-<script src="training.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="app.js"></script>
 
 </body>
