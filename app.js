@@ -1,115 +1,166 @@
-const screens=document.querySelectorAll(".screen")
 
-function showScreen(id){
+function goHome(){
 
-screens.forEach(s=>s.classList.remove("active"))
+hideAll()
 
-document.getElementById(id).classList.add("active")
-
-}
-
-document.getElementById("btnTraining").onclick=()=>{
-
-showScreen("trainingDays")
+document.getElementById("home").classList.remove("hidden")
 
 }
 
-document.getElementById("btnStats").onclick=()=>{
+function showTraining(){
 
-showScreen("stats")
-drawChart()
+hideAll()
 
-}
+document.getElementById("trainingScreen").classList.remove("hidden")
 
-document.getElementById("backHome1").onclick=()=>showScreen("home")
-document.getElementById("backHome2").onclick=()=>showScreen("home")
-document.getElementById("backDays").onclick=()=>showScreen("trainingDays")
-
-
-// CREAR 14 DIAS
-
-const daysContainer=document.getElementById("daysContainer")
-
-for(let i=1;i<=14;i++){
-
-const btn=document.createElement("button")
-
-btn.className="dayButton"
-
-btn.innerText="Día "+i
-
-btn.onclick=()=>openWorkout(i)
-
-daysContainer.appendChild(btn)
+renderDays()
 
 }
 
+function showStats(){
 
-// WORKOUT SIMPLE
+hideAll()
 
-function openWorkout(day){
+document.getElementById("statsScreen").classList.remove("hidden")
 
-showScreen("workout")
+drawCharts()
 
-document.getElementById("workoutTitle").innerText="Entrenamiento Día "+day
+}
 
-document.getElementById("exerciseContainer").innerHTML=
+function hideAll(){
 
-`
-Squat 5x5<br>
-Peso objetivo: 140kg<br><br>
+document.getElementById("home").classList.add("hidden")
+document.getElementById("trainingScreen").classList.add("hidden")
+document.getElementById("workoutScreen").classList.add("hidden")
+document.getElementById("statsScreen").classList.add("hidden")
 
+}
+
+function renderDays(){
+
+let container=document.getElementById("daysContainer")
+
+container.innerHTML=""
+
+trainingDays.forEach(day=>{
+
+let btn=document.createElement("button")
+
+btn.className="dayBtn"
+
+btn.innerText=day.name
+
+btn.onclick=()=>openDay(day)
+
+container.appendChild(btn)
+
+})
+
+}
+
+function openDay(day){
+
+hideAll()
+
+document.getElementById("workoutScreen").classList.remove("hidden")
+
+document.getElementById("dayTitle").innerText=day.name
+
+let container=document.getElementById("exerciseContainer")
+
+container.innerHTML=""
+
+day.exercises.forEach(ex=>{
+
+let div=document.createElement("div")
+
+div.innerHTML=`
+<p>${ex.name}</p>
+<p>Series: ${ex.sets}</p>
+<p>Peso objetivo: ${ex.weight} kg</p>
 <input placeholder="Peso real">
 `
 
+container.appendChild(div)
+
+})
+
 }
 
-
-// TIMER
-
-let rest=120
+let timer=0
 let interval
 
-document.getElementById("startTimer").onclick=()=>{
+function startRest(){
 
-clearInterval(interval)
-
-let time=rest
+timer=120
 
 interval=setInterval(()=>{
 
-let min=Math.floor(time/60)
-let sec=time%60
+timer--
 
-document.getElementById("timer").innerText=
-min+":"+String(sec).padStart(2,"0")
+document.getElementById("time").innerText=timer
 
-time--
-
-if(time<0) clearInterval(interval)
+if(timer==0) clearInterval(interval)
 
 },1000)
 
 }
 
+function drawCharts(){
 
-// CHART
-
-function drawChart(){
-
-new Chart(document.getElementById("progressChart"),{
+new Chart(document.getElementById("benchChart"),{
 
 type:"line",
 
 data:{
 
-labels:["Sem1","Sem2","Sem3","Sem4"],
+labels:["D1","D5","D10","D14"],
 
 datasets:[{
 
-label:"Fuerza",
+label:"Bench",
 
-data:[100,110,125,140]
+data:[130,140,150,160]
+
+}]
+
+}
+
+})
+
+new Chart(document.getElementById("squatChart"),{
+
+type:"line",
+
+data:{
+
+labels:["D1","D5","D10","D14"],
+
+datasets:[{
+
+label:"Squat",
+
+data:[160,170,180,190]
+
+}]
+
+}
+
+})
+
+new Chart(document.getElementById("deadliftChart"),{
+
+type:"line",
+
+data:{
+
+labels:["D1","D5","D10","D14"],
+
+datasets:[{
+
+label:"Deadlift",
+
+data:[170,185,200,210]
 
 }]
 
