@@ -1,85 +1,176 @@
-function goHome(){
-
-document.getElementById("home").classList.remove("hidden")
-
-document.getElementById("trainingScreen").classList.add("hidden")
-document.getElementById("statsScreen").classList.add("hidden")
-document.getElementById("dayDetail").classList.add("hidden")
-
-}
-
 function openTraining(){
 
 document.getElementById("home").classList.add("hidden")
-
 document.getElementById("trainingScreen").classList.remove("hidden")
 
 loadDays()
 
 }
 
+function openStats(){
+
+document.getElementById("home").classList.add("hidden")
+document.getElementById("statsScreen").classList.remove("hidden")
+
+loadStats()
+
+}
+
+function goHome(){
+
+document.getElementById("home").classList.remove("hidden")
+
+document.getElementById("trainingScreen").classList.add("hidden")
+document.getElementById("statsScreen").classList.add("hidden")
+document.getElementById("dayScreen").classList.add("hidden")
+
+}
+
 function loadDays(){
 
-let container=document.getElementById("daysList")
+let container=document.getElementById("daysContainer")
 
 container.innerHTML=""
 
-Object.keys(TRAINING_DAYS).forEach(day=>{
+for(let day in TRAINING_DAYS){
 
 let btn=document.createElement("button")
 
-btn.className="dayBtn"
+btn.className="dayButton"
 
-btn.innerText=TRAINING_DAYS[day].title
+btn.innerText="DÍA "+day
 
 btn.onclick=()=>openDay(day)
 
 container.appendChild(btn)
 
-})
+}
 
 }
 
 function openDay(day){
 
+document.getElementById("trainingScreen").classList.add("hidden")
+document.getElementById("dayScreen").classList.remove("hidden")
+
 let data=TRAINING_DAYS[day]
 
-let html=`<h2>${data.title}</h2>`
+document.getElementById("dayTitle").innerText=data.title
 
-data.exercises.forEach(ex=>{
+let workout=document.getElementById("workout")
 
-html+=`<div class="exercise"><h3>${ex.name}</h3>`
+workout.innerHTML=""
 
-ex.sets.forEach((s,i)=>{
+data.blocks.forEach(block=>{
 
-html+=`
-<div class="setRow">
+if(block.type==="text"){
 
-<span>${s.kg}kg x ${s.reps}</span>
+let div=document.createElement("div")
+div.innerHTML="<h3>"+block.label+"</h3>"
+workout.appendChild(div)
+
+}
+
+if(block.type==="exercise"){
+
+let ex=document.createElement("div")
+ex.className="exercise"
+
+ex.innerHTML="<b>"+block.name+"</b>"
+
+block.sets.forEach(set=>{
+
+let row=document.createElement("div")
+row.className="set"
+
+row.innerHTML=`
+
+<span>${set.kg}kg x ${set.reps}</span>
 
 <input placeholder="real">
 
-<button class="timerBtn" onclick="startTimer(${s.rest})">⏱</button>
+<button class="restButton" onclick="startRest(${set.rest})">
+⏱
+</button>
 
-<span class="done">✔</span>
-
-</div>
 `
 
-})
-
-html+=`</div>`
+ex.appendChild(row)
 
 })
 
-html+=`<button class="backBtn" onclick="openTraining()">Volver</button>`
+workout.appendChild(ex)
 
-document.getElementById("trainingScreen").classList.add("hidden")
+}
 
-let detail=document.getElementById("dayDetail")
+})
 
-detail.innerHTML=html
+}
 
-detail.classList.remove("hidden")
+function backToDays(){
+
+document.getElementById("dayScreen").classList.add("hidden")
+document.getElementById("trainingScreen").classList.remove("hidden")
+
+}
+
+function startRest(sec){
+
+let time=sec
+
+let timer=setInterval(()=>{
+
+time--
+
+if(time<=0){
+
+clearInterval(timer)
+
+alert("Descanso terminado")
+
+}
+
+},1000)
+
+}
+
+function loadStats(){
+
+let squat=[120,130,140]
+let bench=[90,100,110]
+let deadlift=[150,160,170]
+
+new Chart(document.getElementById("squatChart"),{
+
+type:"line",
+
+data:{
+labels:["sem1","sem2","sem3"],
+datasets:[{label:"Squat",data:squat}]
+}
+
+})
+
+new Chart(document.getElementById("benchChart"),{
+
+type:"line",
+
+data:{
+labels:["sem1","sem2","sem3"],
+datasets:[{label:"Bench",data:bench}]
+}
+
+})
+
+new Chart(document.getElementById("deadliftChart"),{
+
+type:"line",
+
+data:{
+labels:["sem1","sem2","sem3"],
+datasets:[{label:"Deadlift",data:deadlift}]
+}
+
+})
 
 }
