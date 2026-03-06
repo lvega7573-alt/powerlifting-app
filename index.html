@@ -1,249 +1,192 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Powerlifting 14D</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Powerlifting Pro</title>
+
+<script src="training-data.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
 body{
-font-family: -apple-system,BlinkMacSystemFont;
-background:#0f0f0f;
+font-family:-apple-system;
+background:#0e0e0e;
 color:white;
 text-align:center;
 margin:0;
 }
 
-h1{
-margin-top:30px;
-}
-
-.container{
-padding:20px;
-}
-
 button{
 width:80%;
-padding:20px;
+padding:22px;
 margin:12px;
-font-size:20px;
+font-size:22px;
 border-radius:14px;
 border:none;
 background:#1f1f1f;
 color:white;
 }
 
-button.big{
-font-size:26px;
-padding:30px;
+.big{
+font-size:28px;
 background:#222;
-}
-
-button.day{
-background:#2d2d2d;
-}
-
-button:active{
-background:#444;
 }
 
 input{
 width:80px;
 padding:10px;
 margin:10px;
-font-size:18px;
-text-align:center;
 }
 
 .timer{
-font-size:24px;
-margin:10px;
-}
-
-.back{
-background:#444;
-margin-top:20px;
+font-size:28px;
+margin:20px;
 }
 
 canvas{
 background:white;
+margin:20px;
 border-radius:10px;
-margin-top:20px;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div id="app" class="container"></div>
+<div id="app"></div>
 
 <script>
 
-const app = document.getElementById("app")
-
-const entrenamiento = {
-
-1:[{ej:"Sentadilla",objetivo:112},{ej:"Pecho",objetivo:90},{ej:"Peso Muerto",objetivo:120}],
-2:[{ej:"Pecho",objetivo:95},{ej:"Sentadilla",objetivo:115}],
-3:[{ej:"Peso Muerto",objetivo:130}],
-4:[{ej:"Pecho",objetivo:100}],
-5:[{ej:"Sentadilla",objetivo:120}],
-6:[{ej:"Peso Muerto",objetivo:140}],
-7:[{ej:"Descanso"}],
-
-8:[{ej:"Sentadilla",objetivo:130},{ej:"Pecho",objetivo:100}],
-9:[{ej:"Peso Muerto",objetivo:150}],
-10:[{ej:"Pecho",objetivo:110}],
-11:[{ej:"Sentadilla",objetivo:140}],
-12:[{ej:"Peso Muerto",objetivo:160}],
-13:[{ej:"Pecho",objetivo:115}],
-14:[{ej:"Competencia"}]
-
-}
+const app=document.getElementById("app")
 
 function home(){
 
 app.innerHTML=`
 
-<h1>POWERLIFTING</h1>
+<h1>POWERLIFTING PRO</h1>
 
-<button class="big" onclick="verEntrenamiento()">🏋️ Entrenamiento</button>
+<button class="big" onclick="training()">🏋️ Entrenamiento</button>
 
-<button class="big" onclick="verStats()">📊 Estadísticas</button>
-
-`
-
-}
-
-function verEntrenamiento(){
-
-let botones=""
-
-for(let i=1;i<=14;i++){
-
-botones+=`<button class="day" onclick="verDia(${i})">Día ${i}</button>`
-
-}
-
-app.innerHTML=`
-
-<h1>Entrenamiento</h1>
-
-${botones}
-
-<button class="back" onclick="home()">Volver</button>
+<button class="big" onclick="stats()">📊 Estadísticas</button>
 
 `
 
 }
 
-function verDia(d){
+function training(){
 
-let lista=""
+let html="<h2>Entrenamiento</h2>"
 
-entrenamiento[d].forEach((e,i)=>{
+for(let d in TRAINING_DAYS){
 
-if(e.objetivo){
+html+=`<button onclick="day(${d})">Día ${d}</button>`
 
-lista+=`
+}
+
+html+=`<button onclick="home()">Volver</button>`
+
+app.innerHTML=html
+
+}
+
+function day(d){
+
+let day=TRAINING_DAYS[d]
+
+let html=`<h2>${day.title}</h2>`
+
+day.blocks.forEach((b,i)=>{
+
+if(b.type=="text"){
+
+html+=`<p>${b.label}</p>`
+
+}
+
+if(b.type=="exercise"){
+
+html+=`<h3>${b.name}</h3>`
+
+b.sets.forEach((s,j)=>{
+
+let id=`${d}-${i}-${j}`
+
+html+=`
 
 <div>
 
-<h3>${e.ej}</h3>
+${s.kg}kg × ${s.reps}
 
-Objetivo: ${e.objetivo} kg<br>
+<input id="r${id}" placeholder="real">
 
-<input type="number" placeholder="Real" id="peso${d}${i}">
+<button onclick="save('${id}')">✔</button>
 
-<br>
-
-<button onclick="guardar(${d},${i})">Guardar</button>
-
-<button onclick="timer()">Descanso</button>
+<button onclick="rest(${s.rest})">⏱</button>
 
 </div>
 
 `
 
-}else{
-
-lista+=`<h2>${e.ej}</h2>`
+})
 
 }
 
 })
 
-app.innerHTML=`
+html+=`<div class="timer" id="timer"></div>`
 
-<h1>Día ${d}</h1>
+html+=`<button onclick="training()">Volver</button>`
 
-${lista}
-
-<div class="timer" id="timer">00:00</div>
-
-<button class="back" onclick="verEntrenamiento()">Volver</button>
-
-`
+app.innerHTML=html
 
 }
 
-function guardar(d,i){
+function save(id){
 
-let peso=document.getElementById("peso"+d+i).value
+let v=document.getElementById("r"+id).value
 
-localStorage.setItem("d"+d+"e"+i,peso)
-
-alert("Guardado")
+localStorage.setItem(id,v)
 
 }
 
-let intervalo
+let interval
 
-function timer(){
+function rest(sec){
 
-let tiempo=120
+clearInterval(interval)
 
-clearInterval(intervalo)
+let t=sec
 
-intervalo=setInterval(()=>{
+interval=setInterval(()=>{
 
-let m=Math.floor(tiempo/60)
-let s=tiempo%60
+let m=Math.floor(t/60)
+
+let s=t%60
 
 document.getElementById("timer").innerText=
 (m<10?"0"+m:m)+":"+(s<10?"0"+s:s)
 
-tiempo--
+t--
 
-if(tiempo<0) clearInterval(intervalo)
+if(t<0) clearInterval(interval)
 
 },1000)
 
 }
 
-function verStats(){
+function stats(){
 
-let pecho=[]
-let sentadilla=[]
-let muerto=[]
+let data=[]
 
-for(let i=1;i<=14;i++){
+for(let k in localStorage){
 
-for(let j=0;j<3;j++){
+if(!isNaN(localStorage[k])){
 
-let v=localStorage.getItem("d"+i+"e"+j)
-
-if(v){
-
-if(j==0) sentadilla.push(v)
-if(j==1) pecho.push(v)
-if(j==2) muerto.push(v)
-
-}
+data.push(localStorage[k])
 
 }
 
@@ -251,27 +194,30 @@ if(j==2) muerto.push(v)
 
 app.innerHTML=`
 
-<h1>Estadísticas</h1>
+<h2>Estadísticas</h2>
 
-<canvas id="grafico"></canvas>
+<canvas id="chart"></canvas>
 
-<button class="back" onclick="home()">Volver</button>
+<button onclick="home()">Volver</button>
 
 `
 
-let ctx=document.getElementById("grafico")
-
-new Chart(ctx,{
+new Chart(document.getElementById("chart"),{
 
 type:"line",
 
 data:{
-labels:["1","2","3","4","5","6","7"],
-datasets:[
-{label:"Pecho",data:pecho},
-{label:"Sentadilla",data:sentadilla},
-{label:"Peso Muerto",data:muerto}
-]
+
+labels:data.map((_,i)=>i+1),
+
+datasets:[{
+
+label:"Peso levantado",
+
+data:data
+
+}]
+
 }
 
 })
