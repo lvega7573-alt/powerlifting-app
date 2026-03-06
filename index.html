@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Powerlifting Coach</title>
+<title>Powerlifting App</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,49 +15,62 @@
 
 <div id="app">
 
-<h1 class="title">POWERLIFTING</h1>
+<!-- HOME -->
 
-<div id="home">
+<div id="home" class="screen active">
+
+<h1 class="logo">POWERLIFT</h1>
 
 <button class="mainButton" onclick="openTraining()">
-🏋️ ENTRENAMIENTO
+ENTRENAMIENTO
 </button>
 
 <button class="mainButton" onclick="openStats()">
-📊 ESTADÍSTICAS
+ESTADÍSTICAS
 </button>
 
 </div>
 
-<div id="trainingScreen" class="hidden">
 
-<button class="back" onclick="goHome()">← Volver</button>
+<!-- TRAINING -->
 
-<h2>Días de entrenamiento</h2>
+<div id="training" class="screen">
+
+<h2>Entrenamientos</h2>
 
 <div id="daysContainer"></div>
 
+<button class="backButton" onclick="goHome()">Volver</button>
+
 </div>
 
-<div id="dayScreen" class="hidden">
 
-<button class="back" onclick="backToDays()">← Volver</button>
+<!-- WORKOUT -->
+
+<div id="workout" class="screen">
 
 <h2 id="dayTitle"></h2>
 
-<div id="workout"></div>
+<div id="workoutContainer"></div>
+
+<button class="backButton" onclick="openTraining()">Volver</button>
 
 </div>
 
-<div id="statsScreen" class="hidden">
 
-<button class="back" onclick="goHome()">← Volver</button>
+<!-- STATS -->
+
+<div id="stats" class="screen">
 
 <h2>Estadísticas</h2>
 
 <canvas id="squatChart"></canvas>
+
 <canvas id="benchChart"></canvas>
+
 <canvas id="deadliftChart"></canvas>
+
+<button class="backButton" onclick="goHome()">Volver</button>
 
 </div>
 
