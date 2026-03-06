@@ -1,103 +1,375 @@
+const TRAINING_DAYS = {
 
-const trainingDays=[
+1:{
+title:"Día 1 – Sentadilla pesada",
+blocks:[
 
-{
-name:"Día 1",
-exercises:[
-{name:"Bench Press",sets:5,weight:95},
-{name:"Squat",sets:5,weight:120}
+{type:"text",label:"Entrada en calor movilidad"},
+
+{type:"exercise",name:"Movilidad Cadera",sets:[
+{kg:"Body",reps:15,rest:60},
+{kg:"Body",reps:15,rest:60}
+]},
+
+{type:"exercise",name:"Movilidad Tobillos",sets:[
+{kg:"Body",reps:15,rest:60},
+{kg:"Body",reps:15,rest:60}
+]},
+
+{type:"exercise",name:"Puente de glúteos",sets:[
+{kg:60,reps:15,rest:60},
+{kg:60,reps:15,rest:60}
+]},
+
+{type:"text",label:"Activación"},
+
+{type:"exercise",name:"Sentadilla aproximación",sets:[
+{kg:20,reps:10,rest:60},
+{kg:20,reps:10,rest:60},
+{kg:40,reps:10,rest:60},
+{kg:60,reps:5,rest:60},
+{kg:80,reps:3,rest:60},
+{kg:95,reps:2,rest:180}
+]},
+
+{type:"exercise",name:"Back Squat",sets:[
+{kg:105,reps:5,rest:180},
+{kg:105,reps:5,rest:180},
+{kg:105,reps:5,rest:180},
+{kg:105,reps:5,rest:180},
+{kg:105,reps:5,rest:180}
+]},
+
+{type:"exercise",name:"Back Squat pesado",sets:[
+{kg:120,reps:3,rest:240},
+{kg:120,reps:3,rest:240},
+{kg:120,reps:3,rest:240},
+{kg:120,reps:3,rest:240}
+]},
+
+{type:"exercise",name:"Back Squat doble pesada",sets:[
+{kg:132,reps:2,rest:240},
+{kg:132,reps:2,rest:240},
+{kg:132,reps:2,rest:240}
+]},
+
+{type:"exercise",name:"Bulgarian Split Squat",sets:[
+{kg:30,reps:8,rest:90},
+{kg:30,reps:8,rest:90},
+{kg:30,reps:8,rest:90}
+]},
+
+{type:"exercise",name:"Curl femoral",sets:[
+{kg:60,reps:8,rest:60},
+{kg:60,reps:8,rest:60},
+{kg:60,reps:8,rest:60}
+]},
+
+{type:"exercise",name:"Plancha",sets:[
+{kg:"Body",reps:"30s",rest:60},
+{kg:"Body",reps:"30s",rest:60},
+{kg:"Body",reps:"30s",rest:60},
+{kg:"Body",reps:"30s",rest:60}
+]}
+
+]},
+
+2:{
+title:"Día 2 – Banca volumen",
+blocks:[
+
+{type:"text",label:"Entrada en calor movilidad"},
+
+{type:"exercise",name:"Rotadores banda",sets:[
+{kg:"Banda",reps:15,rest:60},
+{kg:"Banda",reps:15,rest:60},
+{kg:"Banda",reps:15,rest:60}
+]},
+
+{type:"exercise",name:"Face Pull",sets:[
+{kg:30,reps:15,rest:60},
+{kg:30,reps:15,rest:60}
+]},
+
+{type:"text",label:"Activación"},
+
+{type:"exercise",name:"Bench aproximación",sets:[
+{kg:20,reps:10,rest:60},
+{kg:60,reps:10,rest:60},
+{kg:70,reps:10,rest:60},
+{kg:80,reps:5,rest:180}
+]},
+
+{type:"exercise",name:"Bench volumen",sets:[
+{kg:90,reps:4,rest:180},
+{kg:90,reps:4,rest:180},
+{kg:90,reps:4,rest:180},
+{kg:90,reps:4,rest:180},
+{kg:90,reps:4,rest:180},
+{kg:90,reps:4,rest:180}
+]},
+
+{type:"exercise",name:"Bench pausa",sets:[
+{kg:97,reps:3,rest:180},
+{kg:97,reps:3,rest:180},
+{kg:97,reps:3,rest:180},
+{kg:97,reps:3,rest:180}
+]},
+
+{type:"exercise",name:"Press inclinado",sets:[
+{kg:30,reps:8,rest:90},
+{kg:30,reps:8,rest:90},
+{kg:30,reps:8,rest:90},
+{kg:30,reps:8,rest:90}
+]},
+
+{type:"exercise",name:"Fondos",sets:[
+{kg:"Body+10",reps:6,rest:90},
+{kg:"Body+10",reps:6,rest:90},
+{kg:"Body+10",reps:6,rest:90},
+{kg:"Body+10",reps:6,rest:90}
+]}
+
+]},
+
+3:{
+title:"Día 3 – Peso muerto",
+blocks:[
+
+{type:"exercise",name:"Deadlift aproximación",sets:[
+{kg:60,reps:5,rest:90},
+{kg:100,reps:3,rest:90},
+{kg:115,reps:3,rest:90}
+]},
+
+{type:"exercise",name:"Deadlift volumen",sets:[
+{kg:120,reps:4,rest:180},
+{kg:120,reps:4,rest:180},
+{kg:120,reps:4,rest:180},
+{kg:120,reps:4,rest:180},
+{kg:120,reps:4,rest:180}
+]},
+
+{type:"exercise",name:"Deadlift pausa rodilla",sets:[
+{kg:110,reps:3,rest:180},
+{kg:110,reps:3,rest:180},
+{kg:110,reps:3,rest:180},
+{kg:110,reps:3,rest:180}
+]},
+
+{type:"exercise",name:"Remo barra",sets:[
+{kg:70,reps:8,rest:90},
+{kg:70,reps:8,rest:90},
+{kg:70,reps:8,rest:90},
+{kg:70,reps:8,rest:90}
+]},
+
+{type:"exercise",name:"Hip Thrust",sets:[
+{kg:120,reps:10,rest:90},
+{kg:120,reps:10,rest:90},
+{kg:120,reps:10,rest:90},
+{kg:120,reps:10,rest:90}
+]}
+
+]},
+
+4:{
+title:"Día 4 – Sentadilla velocidad",
+blocks:[
+
+{type:"exercise",name:"Speed Squat",sets:[
+{kg:95,reps:2,rest:90},
+{kg:95,reps:2,rest:90},
+{kg:95,reps:2,rest:90},
+{kg:95,reps:2,rest:90},
+{kg:95,reps:2,rest:90},
+{kg:95,reps:2,rest:90},
+{kg:95,reps:2,rest:90},
+{kg:95,reps:2,rest:90}
+]},
+
+{type:"exercise",name:"Front Squat",sets:[
+{kg:100,reps:4,rest:180},
+{kg:100,reps:4,rest:180},
+{kg:100,reps:4,rest:180},
+{kg:100,reps:4,rest:180}
+]}
+
+]},
+
+5:{
+title:"Día 5 – Banca pesada",
+blocks:[
+
+{type:"exercise",name:"Bench",sets:[
+{kg:104,reps:3,rest:240},
+{kg:104,reps:3,rest:240},
+{kg:104,reps:3,rest:240},
+{kg:104,reps:3,rest:240},
+{kg:104,reps:3,rest:240}
+]},
+
+{type:"exercise",name:"Bench pesado",sets:[
+{kg:110,reps:2,rest:240},
+{kg:110,reps:2,rest:240},
+{kg:110,reps:2,rest:240}
+]},
+
+{type:"exercise",name:"Board Press",sets:[
+{kg:117,reps:3,rest:180},
+{kg:117,reps:3,rest:180},
+{kg:117,reps:3,rest:180},
+{kg:117,reps:3,rest:180}
+]}
+
+]},
+
+6:{
+title:"Día 6 – Deadlift pesado",
+blocks:[
+
+{type:"exercise",name:"Deadlift",sets:[
+{kg:128,reps:3,rest:180},
+{kg:128,reps:3,rest:180},
+{kg:128,reps:3,rest:180},
+{kg:128,reps:3,rest:180}
+]},
+
+{type:"exercise",name:"Deadlift pesado",sets:[
+{kg:140,reps:2,rest:240},
+{kg:140,reps:2,rest:240},
+{kg:140,reps:2,rest:240}
+]},
+
+{type:"exercise",name:"Rack Pull",sets:[
+{kg:153,reps:3,rest:180},
+{kg:153,reps:3,rest:180},
+{kg:153,reps:3,rest:180}
+]}
+
+]},
+
+7:{
+title:"Día 7 – Descanso",
+blocks:[
+{type:"text",label:"Recuperación / caminata"}
 ]
 },
 
-{
-name:"Día 2",
-exercises:[
-{name:"Deadlift",sets:5,weight:130}
+8:{
+title:"Día 8 – Sentadilla pico",
+blocks:[
+{type:"exercise",name:"Squat",sets:[
+{kg:128,reps:3,rest:240},
+{kg:128,reps:3,rest:240},
+{kg:128,reps:3,rest:240},
+{kg:128,reps:3,rest:240}
+]},
+{type:"exercise",name:"Squat pesado",sets:[
+{kg:136,reps:2,rest:240},
+{kg:136,reps:2,rest:240},
+{kg:136,reps:2,rest:240}
+]},
+{type:"exercise",name:"Squat single",sets:[
+{kg:144,reps:1,rest:240},
+{kg:144,reps:1,rest:240},
+{kg:144,reps:1,rest:240}
+]}
 ]
 },
 
-{
-name:"Día 3",
-exercises:[
-{name:"Bench Press",sets:4,weight:100}
+9:{
+title:"Día 9 – Banca pico",
+blocks:[
+{type:"exercise",name:"Bench",sets:[
+{kg:104,reps:3,rest:240},
+{kg:104,reps:3,rest:240},
+{kg:104,reps:3,rest:240},
+{kg:104,reps:3,rest:240}
+]},
+{type:"exercise",name:"Bench pesado",sets:[
+{kg:113,reps:2,rest:240},
+{kg:113,reps:2,rest:240},
+{kg:113,reps:2,rest:240}
+]},
+{type:"exercise",name:"Bench single",sets:[
+{kg:120,reps:1,rest:240},
+{kg:120,reps:1,rest:240},
+{kg:120,reps:1,rest:240}
+]}
 ]
 },
 
-{
-name:"Día 4",
-exercises:[
-{name:"Squat",sets:4,weight:130}
+10:{
+title:"Día 10 – Deadlift pico",
+blocks:[
+{type:"exercise",name:"Deadlift",sets:[
+{kg:136,reps:3,rest:240},
+{kg:136,reps:3,rest:240},
+{kg:136,reps:3,rest:240},
+{kg:136,reps:3,rest:240}
+]},
+{type:"exercise",name:"Deadlift pesado",sets:[
+{kg:148,reps:2,rest:240},
+{kg:148,reps:2,rest:240},
+{kg:148,reps:2,rest:240}
+]},
+{type:"exercise",name:"Deadlift single",sets:[
+{kg:156,reps:1,rest:240},
+{kg:156,reps:1,rest:240}
+]}
 ]
 },
 
-{
-name:"Día 5",
-exercises:[
-{name:"Deadlift",sets:4,weight:140}
+11:{
+title:"Día 11 – Técnica",
+blocks:[
+{type:"exercise",name:"Squat",sets:[
+{kg:95,reps:3,rest:120},
+{kg:95,reps:3,rest:120},
+{kg:95,reps:3,rest:120}
+]},
+{type:"exercise",name:"Bench",sets:[
+{kg:78,reps:3,rest:120},
+{kg:78,reps:3,rest:120},
+{kg:78,reps:3,rest:120}
+]},
+{type:"exercise",name:"Deadlift",sets:[
+{kg:102,reps:2,rest:120},
+{kg:102,reps:2,rest:120},
+{kg:102,reps:2,rest:120}
+]}
 ]
 },
 
-{
-name:"Día 6",
-exercises:[
-{name:"Bench Press",sets:3,weight:110}
+12:{
+title:"Día 12 – Activación neural",
+blocks:[
+{type:"exercise",name:"Squat",sets:[
+{kg:136,reps:1,rest:240},
+{kg:136,reps:1,rest:240},
+{kg:136,reps:1,rest:240}
+]},
+{type:"exercise",name:"Bench",sets:[
+{kg:110,reps:1,rest:240},
+{kg:110,reps:1,rest:240},
+{kg:110,reps:1,rest:240}
+]}
 ]
 },
 
-{
-name:"Día 7",
-exercises:[
-{name:"Squat",sets:3,weight:140}
+13:{
+title:"Día 13 – Descanso total",
+blocks:[
+{type:"text",label:"Descanso completo"}
 ]
 },
 
-{
-name:"Día 8",
-exercises:[
-{name:"Bench Press",sets:3,weight:115}
-]
-},
-
-{
-name:"Día 9",
-exercises:[
-{name:"Deadlift",sets:3,weight:150}
-]
-},
-
-{
-name:"Día 10",
-exercises:[
-{name:"Squat",sets:3,weight:150}
-]
-},
-
-{
-name:"Día 11",
-exercises:[
-{name:"Bench Press",sets:2,weight:120}
-]
-},
-
-{
-name:"Día 12",
-exercises:[
-{name:"Deadlift",sets:2,weight:160}
-]
-},
-
-{
-name:"Día 13",
-exercises:[
-{name:"Squat",sets:2,weight:155}
-]
-},
-
-{
-name:"Día 14",
-exercises:[
-{name:"Test Max",sets:1,weight:"MAX"}
+14:{
+title:"Día 14 – COMPETENCIA",
+blocks:[
+{type:"text",label:"Objetivo total 490kg"}
 ]
 }
 
-]
+};
