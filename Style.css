@@ -1,87 +1,134 @@
-body{
+html,body{
+
 margin:0;
-font-family:-apple-system,BlinkMacSystemFont;
-background:#0f0f0f;
+padding:0;
+
+background:black;
 color:white;
-text-align:center;
+
+font-family:-apple-system,BlinkMacSystemFont;
+
 }
 
+
 .screen{
+
 display:none;
 padding:30px;
+text-align:center;
+
 }
 
 .active{
+
 display:block;
+
 }
 
-.logo{
-font-size:34px;
-margin-top:80px;
-margin-bottom:60px;
-letter-spacing:3px;
+
+h1{
+
+font-size:42px;
+margin-top:40px;
+
 }
 
 .mainButton{
-width:80%;
+
+width:85%;
 max-width:320px;
+
 padding:22px;
+
+font-size:22px;
+
 margin:20px auto;
-font-size:20px;
-border:none;
-border-radius:12px;
+
+display:block;
+
 background:white;
 color:black;
-font-weight:600;
-display:block;
+
+border:none;
+
+border-radius:14px;
+
+font-weight:bold;
+
+}
+
+.mainButton:active{
+
+transform:scale(0.96);
+
+}
+
+#daysContainer{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+margin-top:20px;
+
 }
 
 .dayButton{
-width:90%;
-padding:16px;
-margin:8px auto;
-font-size:16px;
-border:none;
-border-radius:10px;
-background:#1f1f1f;
+
+padding:18px;
+
+font-size:18px;
+
+background:#1c1c1c;
+
 color:white;
-}
 
-.exerciseCard{
-background:#1a1a1a;
-border-radius:10px;
-padding:15px;
-margin:12px auto;
-width:95%;
-}
-
-.setRow{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin:8px 0;
-}
-
-.setRow input{
-width:70px;
-padding:6px;
-border-radius:6px;
 border:none;
+
+border-radius:10px;
+
 }
 
 .timerButton{
-padding:6px 10px;
-border:none;
-border-radius:6px;
-background:#3a3a3a;
+
+margin-top:25px;
+
+padding:18px;
+
+font-size:20px;
+
+background:#00c853;
+
 color:white;
+
+border:none;
+
+border-radius:12px;
+
 }
 
 .backButton{
+
 margin-top:30px;
-padding:12px 25px;
+
+padding:14px 28px;
+
+background:#444;
+
+color:white;
+
 border:none;
-border-radius:8px;
-background:white;
-color:black;
+
+border-radius:10px;
+
+}
+
+#timer{
+
+font-size:42px;
+
+margin-top:20px;
+
 }
