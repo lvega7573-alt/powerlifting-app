@@ -1,140 +1,108 @@
 body{
-
-font-family:-apple-system;
-background:#111;
+background:#0e0e0e;
 color:white;
-text-align:center;
+font-family:-apple-system;
 margin:0;
 padding:20px;
-
 }
 
-.logo{
-
-font-size:32px;
+.title{
+text-align:center;
+font-size:28px;
 margin-bottom:40px;
-
 }
 
-.mainBtn{
+.mainButton{
 
-width:90%;
-max-width:350px;
-
-padding:25px;
-
+width:100%;
+padding:30px;
 font-size:22px;
+margin-bottom:20px;
 
-margin:20px auto;
-
+background:#1e1e1e;
 border:none;
-border-radius:15px;
-
-background:#1e88e5;
+border-radius:16px;
 
 color:white;
 
-display:block;
-
 }
 
-.mainBtn:active{
-
-transform:scale(0.97)
-
+.mainButton:hover{
+background:#333;
 }
 
 .hidden{
+display:none;
+}
 
-display:none
+#daysContainer{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.dayButton{
+
+padding:18px;
+background:#1e1e1e;
+border-radius:12px;
+border:none;
+color:white;
+font-size:16px;
 
 }
 
-.dayBtn{
-
-background:#222;
-border:none;
-
-padding:20px;
-
-margin:10px;
-
-border-radius:10px;
-
-color:white;
-
-font-size:18px;
-
-width:90%;
-
+.dayButton:hover{
+background:#333;
 }
 
 .exercise{
 
-background:#1c1c1c;
-
-margin:15px;
-
+background:#1e1e1e;
 padding:15px;
-
 border-radius:10px;
+margin-bottom:15px;
 
 }
 
-.setRow{
+.set{
 
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
-margin:8px 0;
+margin-top:6px;
 
 }
 
 input{
-
-width:60px;
+width:70px;
 padding:6px;
-
-}
-
-.timerBtn{
-
-background:#4caf50;
-
-border:none;
-
-padding:6px 10px;
-
 border-radius:6px;
-
-color:white;
-
+border:none;
 }
 
-.done{
-
-color:#4caf50;
-font-weight:bold;
-
-}
-
-.backBtn{
-
-margin-top:20px;
-
-padding:15px;
-
-font-size:18px;
+.restButton{
 
 background:#444;
-
-border:none;
-
-border-radius:10px;
-
 color:white;
+border:none;
+padding:6px 10px;
+border-radius:6px;
 
+}
+
+.back{
+
+margin-bottom:20px;
+background:none;
+border:none;
+color:#aaa;
+font-size:16px;
+
+}
+
+canvas{
+margin-top:30px;
+background:white;
+border-radius:12px;
 }
