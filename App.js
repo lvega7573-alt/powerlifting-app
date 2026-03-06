@@ -1,156 +1,120 @@
+const screens=document.querySelectorAll(".screen")
+
 function showScreen(id){
 
-document.querySelectorAll(".screen").forEach(s=>{
-s.classList.remove("active")
-})
+screens.forEach(s=>s.classList.remove("active"))
 
 document.getElementById(id).classList.add("active")
 
 }
 
-function goHome(){
-showScreen("home")
+document.getElementById("btnTraining").onclick=()=>{
+
+showScreen("trainingDays")
+
 }
 
-function openTraining(){
+document.getElementById("btnStats").onclick=()=>{
 
-showScreen("training")
+showScreen("stats")
+drawChart()
 
-const container=document.getElementById("daysContainer")
+}
 
-container.innerHTML=""
+document.getElementById("backHome1").onclick=()=>showScreen("home")
+document.getElementById("backHome2").onclick=()=>showScreen("home")
+document.getElementById("backDays").onclick=()=>showScreen("trainingDays")
 
-Object.keys(TRAINING_DAYS).forEach(day=>{
+
+// CREAR 14 DIAS
+
+const daysContainer=document.getElementById("daysContainer")
+
+for(let i=1;i<=14;i++){
 
 const btn=document.createElement("button")
 
 btn.className="dayButton"
 
-btn.innerText="Día "+day
+btn.innerText="Día "+i
 
-btn.onclick=()=>openWorkout(day)
+btn.onclick=()=>openWorkout(i)
 
-container.appendChild(btn)
-
-})
+daysContainer.appendChild(btn)
 
 }
+
+
+// WORKOUT SIMPLE
 
 function openWorkout(day){
 
 showScreen("workout")
 
-const dayData=TRAINING_DAYS[day]
+document.getElementById("workoutTitle").innerText="Entrenamiento Día "+day
 
-document.getElementById("dayTitle").innerText=dayData.title
+document.getElementById("exerciseContainer").innerHTML=
 
-const container=document.getElementById("workoutContainer")
+`
+Squat 5x5<br>
+Peso objetivo: 140kg<br><br>
 
-container.innerHTML=""
-
-dayData.blocks.forEach(block=>{
-
-if(block.type==="text"){
-
-const div=document.createElement("div")
-
-div.innerText=block.label
-
-container.appendChild(div)
+<input placeholder="Peso real">
+`
 
 }
 
-if(block.type==="exercise"){
 
-const card=document.createElement("div")
+// TIMER
 
-card.className="exerciseCard"
+let rest=120
+let interval
 
-const title=document.createElement("h3")
-
-title.innerText=block.name
-
-card.appendChild(title)
-
-block.sets.forEach(set=>{
-
-const row=document.createElement("div")
-
-row.className="setRow"
-
-const target=document.createElement("span")
-
-target.innerText=set.kg+"kg x "+set.reps
-
-const input=document.createElement("input")
-
-input.placeholder="real"
-
-const timer=document.createElement("button")
-
-timer.className="timerButton"
-
-timer.innerText="rest"
-
-timer.onclick=()=>startTimer(set.rest)
-
-row.appendChild(target)
-row.appendChild(input)
-row.appendChild(timer)
-
-card.appendChild(row)
-
-})
-
-container.appendChild(card)
-
-}
-
-})
-
-}
-
-function startTimer(seconds){
-
-let time=seconds
-
-const interval=setInterval(()=>{
-
-time--
-
-if(time<=0){
+document.getElementById("startTimer").onclick=()=>{
 
 clearInterval(interval)
 
-alert("Descanso terminado")
+let time=rest
 
-}
+interval=setInterval(()=>{
+
+let min=Math.floor(time/60)
+let sec=time%60
+
+document.getElementById("timer").innerText=
+min+":"+String(sec).padStart(2,"0")
+
+time--
+
+if(time<0) clearInterval(interval)
 
 },1000)
 
 }
 
-function openStats(){
 
-showScreen("stats")
+// CHART
 
-createCharts()
+function drawChart(){
 
-}
+new Chart(document.getElementById("progressChart"),{
 
-function createCharts(){
-
-const ctx=document.getElementById("squatChart")
-
-new Chart(ctx,{
 type:"line",
+
 data:{
-labels:["Semana1","Semana2","Semana3"],
+
+labels:["Sem1","Sem2","Sem3","Sem4"],
+
 datasets:[{
-label:"Sentadilla",
-data:[150,160,170]
+
+label:"Fuerza",
+
+data:[100,110,125,140]
+
 }]
+
 }
+
 })
 
 }
